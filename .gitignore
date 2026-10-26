@@ -1,0 +1,28 @@
+# Dependencias y Logs (aplica a /client y /backend)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Variables de Entorno y Credenciales Sensibles
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Archivos de Compilación y Distribución
+client/dist/
+client/dist-ssr/
+dist/
+build/
+
+# Archivos de editores de código y sistema operativo
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Cobertura de pruebas y directorios temporales
+coverage/
+.npm/
