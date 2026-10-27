@@ -1,0 +1,28 @@
+{
+  "name": "hermanos-jota",
+  "version": "1.0.0",
+  "description": "- Polci Mateo\\n - Scarpelli Catalina\\n - Lopez Maximiliano\\n - Romero Pablo Francisco\\n - Mena Pamela Lucia",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mateopolci/itba-fullstack-9.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/mateopolci/itba-fullstack-9/issues"
+  },
+  "homepage": "https://github.com/mateopolci/itba-fullstack-9#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "mongoose": "^9.11.4"
+  }
+}
