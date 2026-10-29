@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { connectDB } from './config/db.js';
+import productosRoutes from './routes/productosRoutes.js';
 
 dotenv.config();
 
@@ -20,5 +21,8 @@ const startServer = async () => {
         console.log(`Servidor corriendo en el puerto: ${PORT}`);
     });
 };
+
+// ... (después de tus middlewares de express.json y cors)
+app.use('/api', productosRoutes);
 
 startServer();
