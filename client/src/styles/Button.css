@@ -1,0 +1,128 @@
+.button {
+  /* Valores por defecto; cada variante los redefine */
+  --btn-bg: var(--color-primary);
+  --btn-color: #fff;
+  --btn-border: var(--color-primary);
+  --btn-bg-hover: var(--color-primary-dark);
+  --btn-color-hover: #fff;
+  --btn-border-hover: var(--color-primary-dark);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: var(--space-2) var(--space-5);
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: var(--font-weight-medium);
+  line-height: 1.2;
+  color: var(--btn-color);
+  background-color: var(--btn-bg);
+  border: 2px solid var(--btn-border);
+  border-radius: var(--radius-sm);
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.button:hover {
+  color: var(--btn-color-hover);
+  background-color: var(--btn-bg-hover);
+  border-color: var(--btn-border-hover);
+  box-shadow: var(--shadow-soft);
+}
+
+.button:active {
+  box-shadow: none;
+}
+
+/* Variantes */
+.primary {
+  --btn-bg: var(--color-primary);
+  --btn-border: var(--color-primary);
+  --btn-bg-hover: var(--color-primary-dark);
+  --btn-border-hover: var(--color-primary-dark);
+}
+
+.secondary {
+  --btn-bg: var(--color-secondary);
+  --btn-color: var(--color-text);
+  --btn-border: var(--color-secondary);
+  --btn-bg-hover: color-mix(in srgb, var(--color-secondary) 82%, #000);
+  --btn-color-hover: var(--color-text);
+  --btn-border-hover: color-mix(in srgb, var(--color-secondary) 82%, #000);
+}
+
+.outline {
+  --btn-bg: transparent;
+  --btn-color: var(--color-primary);
+  --btn-border: var(--color-primary);
+  --btn-bg-hover: var(--color-primary);
+  --btn-color-hover: #fff;
+  --btn-border-hover: var(--color-primary);
+}
+
+/* Se oscurece el danger base para cumplir contraste AA con texto blanco */
+.danger {
+  --btn-bg: color-mix(in srgb, var(--color-danger) 85%, #000);
+  --btn-border: color-mix(in srgb, var(--color-danger) 85%, #000);
+  --btn-bg-hover: color-mix(in srgb, var(--color-danger) 70%, #000);
+  --btn-border-hover: color-mix(in srgb, var(--color-danger) 70%, #000);
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Estados deshabilitado y cargando */
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  box-shadow: none;
+}
+
+.button:disabled:hover {
+  color: var(--btn-color);
+  background-color: var(--btn-bg);
+  border-color: var(--btn-border);
+}
+
+.loading:disabled {
+  cursor: progress;
+}
+
+/* Spinner CSS puro */
+.spinner {
+  flex-shrink: 0;
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+
+  .spinner {
+    animation-duration: 2s;
+  }
+}

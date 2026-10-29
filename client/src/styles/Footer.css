@@ -1,0 +1,142 @@
+.footer {
+  margin-top: var(--space-8);
+  color: var(--color-background);
+  background-color: var(--color-primary-dark);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  padding-block: var(--space-7) var(--space-6);
+}
+
+.brandName {
+  margin-bottom: var(--space-2);
+  font-family: var(--font-secondary);
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  color: #fff;
+}
+
+.description {
+  max-width: 36ch;
+  color: rgba(245, 230, 211, 0.9);
+}
+
+.heading {
+  margin-bottom: var(--space-3);
+  font-family: var(--font-primary);
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-style: normal;
+}
+
+.link {
+  display: inline-block;
+  padding-block: var(--space-1);
+  color: inherit;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast);
+}
+
+.link:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* redes */
+.social {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.socialLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: var(--color-background);
+  border: 1px solid rgba(245, 230, 211, 0.4);
+  border-radius: 50%;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.socialLink:hover {
+  color: var(--color-primary-dark);
+  background-color: var(--color-background);
+  transform: translateY(-2px);
+}
+
+.link:focus-visible,
+.socialLink:focus-visible {
+  outline-color: var(--color-background);
+}
+
+
+.bottom {
+  border-top: 1px solid rgba(245, 230, 211, 0.2);
+}
+
+.copyright {
+  padding-block: var(--space-4);
+  font-size: 0.875rem;
+  text-align: center;
+  color: rgba(245, 230, 211, 0.85);
+}
+
+
+@media (min-width: 768px) {
+  .inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-7) var(--space-6);
+  }
+
+  .brand {
+    grid-column: 1 / -1;
+  }
+}
+
+
+@media (min-width: 1024px) {
+  .inner {
+    grid-template-columns: 1.5fr 1fr 1fr;
+  }
+
+  .brand {
+    grid-column: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link,
+  .socialLink {
+    transition: none;
+  }
+
+  .socialLink:hover {
+    transform: none;
+  }
+}
