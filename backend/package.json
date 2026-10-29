@@ -1,7 +1,7 @@
 {
   "name": "hermanos-jota",
   "version": "1.0.0",
-  "description": "- Polci Mateo\\n - Scarpelli Catalina\\n - Lopez Maximiliano\\n - Romero Pablo Francisco\\n - Mena Pamela Lucia",
+  "description": "- Polci Mateo\r - Scarpelli Catalina\r - Lopez Maximiliano\r - Romero Pablo Francisco\r - Mena Pamela Lucia",
   "main": "index.js",
   "scripts": {
     "start": "node src/server.js",
