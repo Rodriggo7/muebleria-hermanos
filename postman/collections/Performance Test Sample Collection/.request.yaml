@@ -1,0 +1,22 @@
+$kind: http-request
+name: ""
+url: http://localhost:4000/api/productos
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: "{\r
+
+    \  \"nombre\": \"Mesa de comedor Industrial\",\r
+
+    \  \"descripcion\": \"Mesa de madera de pino y estructura de hierro negro\",\r
+
+    \  \"precio\": 125000,\r
+
+    \  \"stock\": 10,\r
+
+    \  \"imagenUrl\": \"https://ejemplo.com/mesa.jpg\"\r
+
+    }"
+order: 1000

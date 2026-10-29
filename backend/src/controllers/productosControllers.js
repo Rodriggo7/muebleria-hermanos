@@ -1,7 +1,7 @@
-import Producto from '../models/Producto.js';
+import Producto from '../models/producto.js';
 
 // 1. Obtener todos los productos (GET)
-export const getProductos = async (req, res) => {
+export const getProducto = async (req, res) => {
     try {
         const productos = await Producto.find();
         res.status(200).json(productos);

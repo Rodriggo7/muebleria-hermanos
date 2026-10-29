@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { connectDB } from './config/db.js';
-import productosRoutes from './routes/productosRoutes.js';
+import productoRoutes from './routes/productosRoutes.js';
 
 dotenv.config();
 
@@ -23,6 +23,6 @@ const startServer = async () => {
 };
 
 // ... (después de tus middlewares de express.json y cors)
-app.use('/api', productosRoutes);
+app.use('/api/productos', productoRoutes);
 
 startServer();
