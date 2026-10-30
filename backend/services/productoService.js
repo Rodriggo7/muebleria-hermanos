@@ -1,7 +1,7 @@
 // backend/services/productoService.js
 import mongoose from 'mongoose';
 import productoRepository from '../repositories/productoRepository.js';
-import { CATEGORIAS_PERMITIDAS } from '../constants/categorias.js';
+import { CATEGORIAS_PERMITIDAS } from '../Constants/categorias.js';
 
 // Helper interno para validar el formato del ObjectId de MongoDB
 function validarObjectId(id) {
