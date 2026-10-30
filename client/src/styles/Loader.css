@@ -1,4 +1,4 @@
-.wrapper {
+.loader-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,7 +8,7 @@
   padding: var(--space-6);
 }
 
-.fullScreen {
+.loader-fullScreen {
   position: fixed;
   inset: 0;
   z-index: 1000;
@@ -16,7 +16,7 @@
   background-color: rgba(245, 230, 211, 0.9);
 }
 
-.spinner {
+.loader-spinner {
   display: block;
   border-style: solid;
   border-color: color-mix(in srgb, var(--color-primary) 20%, transparent);
@@ -25,25 +25,25 @@
   animation: spin 0.8s linear infinite;
 }
 
-.sm {
+.loader-sm {
   width: 20px;
   height: 20px;
   border-width: 3px;
 }
 
-.md {
+.loader-md {
   width: 40px;
   height: 40px;
   border-width: 4px;
 }
 
-.lg {
+.loader-lg {
   width: 64px;
   height: 64px;
   border-width: 6px;
 }
 
-.label {
+.loader-label {
   font-size: 0.875rem;
   font-weight: var(--font-weight-medium);
   color: var(--color-text-light);
@@ -68,7 +68,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .spinner {
+  .loader-spinner {
     animation-duration: 2.4s;
   }
 }
