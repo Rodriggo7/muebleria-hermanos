@@ -26,3 +26,6 @@ Thumbs.db
 # Cobertura de pruebas y directorios temporales
 coverage/
 .npm/
+
+# Archivos auxiliares y temporales
+DEV_NOTES.md

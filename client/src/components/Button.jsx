@@ -1,5 +1,4 @@
 import { forwardRef } from "react";
-import styles from "../styles/Button.module.css";
 
 const VARIANTS = ["primary", "secondary", "outline", "danger"];
 
@@ -19,13 +18,7 @@ const Button = forwardRef(function Button(
 ) {
   const safeVariant = VARIANTS.includes(variant) ? variant : "primary";
 
-  const classes = [
-    styles.button,
-    styles[safeVariant],
-    fullWidth && styles.fullWidth,
-    loading && styles.loading,
-    className,
-  ]
+  const classes = ["button", safeVariant, fullWidth && "fullWidth", loading && "loading", className]
     .filter(Boolean)
     .join(" ");
 
@@ -39,10 +32,10 @@ const Button = forwardRef(function Button(
       {...rest}
      >
       {loading ? (
-        <span className={styles.spinner} aria-hidden="true" />
+        <span className="spinner" aria-hidden="true" />
       ) : (
         icon && (
-          <span className={styles.icon} aria-hidden="true">
+          <span className="icon" aria-hidden="true">
             {icon}
           </span>
         )

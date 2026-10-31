@@ -1,4 +1,4 @@
-export const errorHandler = (err, req, res, next) => {
+﻿export const errorHandler = (err, req, res, next) => {
   console.error(
     `[Error API] ${req.method} ${req.originalUrl} - ${err.message}`
   );
@@ -7,7 +7,7 @@ export const errorHandler = (err, req, res, next) => {
     return next(err);
   }
 
-  let statusCode = err.statusCode || err.status || 500;
+  let statusCode = Number(err.statusCode || err.status) || 500;
 
   if (err.name === 'CastError' || err.name === 'ValidationError') {
     statusCode = 400;
@@ -22,6 +22,9 @@ export const errorHandler = (err, req, res, next) => {
   }
 
   const esErrorServidor = statusCode >= 500;
+  const mensaje = esErrorServidor
+    ? 'Ocurrió un problema al procesar la solicitud.'
+    : err.message;
 
   res.status(statusCode).json({
     error: esErrorServidor
@@ -29,9 +32,8 @@ export const errorHandler = (err, req, res, next) => {
       : statusCode === 409
         ? 'Conflicto de datos'
         : err.name || 'Solicitud inválida',
-    mensaje: esErrorServidor
-      ? 'Ocurrió un problema al procesar la solicitud. Nuestros artesanos están trabajando en ello.'
-      : err.message,
+    mensaje,
+    message: mensaje,
   });
 };
 

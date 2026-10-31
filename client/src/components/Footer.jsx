@@ -1,10 +1,10 @@
-import styles from "../styles/Footer.module.css";
+import "../styles/Footer.css";
+
+const styles = Object.fromEntries(["footer", "inner", "brand", "brandName", "description", "social", "socialLink", "heading", "list", "link", "contact", "bottom", "copyright"].map((name) => [name, name]));
 
 const DEFAULT_USEFUL_LINKS = [
-  { label: "Envíos y entregas", href: "/envios" },
-  { label: "Cambios y devoluciones", href: "/devoluciones" },
-  { label: "Preguntas frecuentes", href: "/faq" },
-  { label: "Términos y condiciones", href: "/terminos" },
+  { label: "Productos", href: "/productos" },
+  { label: "Contacto", href: "/contacto" },
 ];
 
 const DEFAULT_SOCIAL_LINKS = [
@@ -14,7 +14,7 @@ const DEFAULT_SOCIAL_LINKS = [
 const DEFAULT_CONTACT = {
   address: "Av. San Juan 2847, CABA, Argentina",
   email: "ventas@hermanosjota.com.ar",
-  whatsapp: "+54 11 4567-8900",
+  phone: "+54 11 4567-8900",
 };
 
 const ICON_PROPS = {

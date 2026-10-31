@@ -1,0 +1,11 @@
+.hero {
+  margin-block: var(--space-6);
+  padding: clamp(2rem, 7vw, 6rem);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(120deg, rgba(47,47,47,.72), rgba(47,47,47,.18)), url("https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=85") center/cover;
+  color: white;
+}
+.hero h1, .hero p { max-width: 18ch; margin-bottom: var(--space-4); color: white; }
+.eyebrow { text-transform: uppercase; letter-spacing: .12em; }
+.section { padding-block: var(--space-7); }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: var(--space-5); margin-block: var(--space-5); }

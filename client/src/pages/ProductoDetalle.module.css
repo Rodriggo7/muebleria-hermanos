@@ -1,0 +1,4 @@
+.page { display: grid; grid-template-columns: 1fr; gap: var(--space-6); align-items: center; padding-block: var(--space-7); }
+.image { width: 100%; max-height: 580px; object-fit: cover; border-radius: var(--radius-md); }
+.content { display: grid; gap: var(--space-4); justify-items: start; }
+@media (min-width: 768px) { .page { grid-template-columns: 1fr 1fr; } }
