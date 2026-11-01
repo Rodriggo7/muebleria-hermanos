@@ -1,5 +1,6 @@
-import { memo, useMemo } from "react";
+﻿import { memo, useMemo } from "react";
 import Button from "./Button";
+import "../styles/ProductCard.css";
 
 function ProductCard({
   id,

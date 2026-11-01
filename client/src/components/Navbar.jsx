@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+﻿import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import "../styles/Navbar.css";
 
 const DEFAULT_LINKS = [
   { label: "Inicio", href: "/" },
@@ -8,7 +9,7 @@ const DEFAULT_LINKS = [
 ];
 
 function Navbar({
-  brandName = "Mueblería Hermanos",
+  brandName = "Mueblería Hermanos Jota",
   links = DEFAULT_LINKS,
   onNavigate,
 }) {
@@ -16,7 +17,9 @@ function Navbar({
   const menuId = useId();
   const toggleRef = useRef(null);
 
-  const toggleMenu = useCallback(() => setIsOpen((prev) => !prev), []);
+  const toggleMenu = useCallback(() => {
+    setIsOpen((prev) => !prev);
+  }, []);
 
   useEffect(() => {
     if (!isOpen) return undefined;
@@ -48,16 +51,13 @@ function Navbar({
   };
 
   return (
-      <header className="header">
-      <nav
-        className="nav container"
-        aria-label="Navegación principal"
-       >
+    <header className="header">
+      <nav className="nav container" aria-label="Navegación principal">
         <Link
           to="/"
           className="logo"
           aria-label={`${brandName} - Ir al inicio`}
-         >
+        >
           {brandName}
         </Link>
 
@@ -69,35 +69,31 @@ function Navbar({
           aria-controls={menuId}
           aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
           onClick={toggleMenu}
-         >
-          <span
-            className="bar barTop"
-            aria-hidden="true"
-          />
-          <span
-            className="bar barMiddle"
-            aria-hidden="true"
-          />
-          <span
-            className="bar barBottom"
-            aria-hidden="true"
-          />
+        >
+          <span className="bar barTop" aria-hidden="true" />
+          <span className="bar barMiddle" aria-hidden="true" />
+          <span className="bar barBottom" aria-hidden="true" />
         </button>
 
         <div
           id={menuId}
           className={`menuWrapper ${isOpen ? "menuOpen" : ""}`}
-         >
+        >
           <ul className="menu" role="list">
-            {links.map((link) => {
-              return (
-                <li key={link.href}>
-                  <NavLink to={link.href} end={link.href === "/"} className={({ isActive }) => `link ${isActive ? "active" : ""}`} onClick={handleLinkClick(link)}>
-                    {link.label}
-                  </NavLink>
-                </li>
-              );
-            })}
+            {links.map((link) => (
+              <li key={link.href}>
+                <NavLink
+                  to={link.href}
+                  end={link.href === "/"}
+                  className={({ isActive }) =>
+                    `link ${isActive ? "active" : ""}`
+                  }
+                  onClick={handleLinkClick(link)}
+                >
+                  {link.label}
+                </NavLink>
+              </li>
+            ))}
           </ul>
         </div>
       </nav>

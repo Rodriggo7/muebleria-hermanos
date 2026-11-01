@@ -1,98 +1,133 @@
-// backend/services/productoService.js
-import mongoose from 'mongoose';
+﻿import mongoose from 'mongoose';
 import productoRepository from '../repositories/productoRepository.js';
 import { CATEGORIAS_PERMITIDAS } from '../Constants/categorias.js';
 
-// Helper interno para validar el formato del ObjectId de MongoDB
+function crearError(mensaje, statusCode = 400) {
+  const error = new Error(mensaje);
+  error.statusCode = statusCode;
+  return error;
+}
+
 function validarObjectId(id) {
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    const error = new Error('El identificador provisto no tiene un formato válido de MongoDB.');
-    error.statusCode = 400;
-    throw error;
+    throw crearError(
+      'El identificador provisto no tiene un formato válido de MongoDB.'
+    );
+  }
+}
+
+function validarPrecio(precio) {
+  if (
+    precio === undefined ||
+    precio === null ||
+    precio === '' ||
+    !Number.isFinite(Number(precio)) ||
+    Number(precio) < 0
+  ) {
+    throw crearError(
+      'El precio debe ser un valor numérico mayor o igual a cero.'
+    );
+  }
+}
+
+function validarStock(stock) {
+  if (
+    stock === undefined ||
+    stock === null ||
+    stock === '' ||
+    !Number.isInteger(Number(stock)) ||
+    Number(stock) < 0
+  ) {
+    throw crearError(
+      'El stock debe ser un número entero mayor o igual a cero.'
+    );
   }
 }
 
 export class ProductoService {
-  // 1. Obtener todos los productos activos
   async obtenerProductos() {
     return await productoRepository.findAll();
   }
 
-  // 2. Obtener un producto activo por ID
   async obtenerProductoPorId(id) {
     validarObjectId(id);
+
     const producto = await productoRepository.findById(id);
+
     if (!producto) {
-      const error = new Error('No se encontró la pieza solicitada en la casa taller.');
-      error.statusCode = 404;
-      throw error;
+      throw crearError(
+        'No se encontró la pieza solicitada en la casa taller.',
+        404
+      );
     }
+
     return producto;
   }
 
-  // 3. Crear un nuevo producto
   async crearProducto(datosProducto) {
-    const { nombre, precio, categoria } = datosProducto;
+    const { nombre, precio, categoria, stock } = datosProducto;
 
-    if (!nombre || nombre.trim() === '') {
-      const error = new Error('El nombre de la pieza es obligatorio.');
-      error.statusCode = 400;
-      throw error;
+    if (!nombre || typeof nombre !== 'string' || nombre.trim() === '') {
+      throw crearError('El nombre de la pieza es obligatorio.');
     }
 
-    if (precio === undefined || isNaN(precio) || precio < 0) {
-      const error = new Error('El precio debe ser un valor numérico mayor o igual a cero.');
-      error.statusCode = 400;
-      throw error;
-    }
+    validarPrecio(precio);
+    validarStock(stock === undefined ? 0 : stock);
 
     if (!categoria || !CATEGORIAS_PERMITIDAS.includes(categoria)) {
-      const error = new Error(`La categoría es inválida. Categorías permitidas: ${CATEGORIAS_PERMITIDAS.join(', ')}.`);
-      error.statusCode = 400;
-      throw error;
+      throw crearError(
+        `La categoría es inválida. Categorías permitidas: ${CATEGORIAS_PERMITIDAS.join(', ')}.`
+      );
     }
 
     return await productoRepository.create(datosProducto);
   }
 
-  // 4. Actualizar un producto existente
   async actualizarProducto(id, datosActualizados) {
     validarObjectId(id);
 
     if (datosActualizados.precio !== undefined) {
-      if (isNaN(datosActualizados.precio) || datosActualizados.precio < 0) {
-        const error = new Error('El precio debe ser un valor numérico mayor o igual a cero.');
-        error.statusCode = 400;
-        throw error;
-      }
+      validarPrecio(datosActualizados.precio);
     }
 
-    if (datosActualizados.categoria !== undefined && !CATEGORIAS_PERMITIDAS.includes(datosActualizados.categoria)) {
-      const error = new Error(`La categoría es inválida. Categorías permitidas: ${CATEGORIAS_PERMITIDAS.join(', ')}.`);
-      error.statusCode = 400;
-      throw error;
+    if (datosActualizados.stock !== undefined) {
+      validarStock(datosActualizados.stock);
     }
 
-    const productoActualizado = await productoRepository.update(id, datosActualizados);
+    if (
+      datosActualizados.categoria !== undefined &&
+      !CATEGORIAS_PERMITIDAS.includes(datosActualizados.categoria)
+    ) {
+      throw crearError(
+        `La categoría es inválida. Categorías permitidas: ${CATEGORIAS_PERMITIDAS.join(', ')}.`
+      );
+    }
+
+    const productoActualizado = await productoRepository.update(
+      id,
+      datosActualizados
+    );
 
     if (!productoActualizado) {
-      const error = new Error('No se encontró la pieza que intenta modificar.');
-      error.statusCode = 404;
-      throw error;
+      throw crearError(
+        'No se encontró la pieza que intenta modificar.',
+        404
+      );
     }
 
     return productoActualizado;
   }
 
-  // 5. Eliminar un producto (Soft Delete)
   async eliminarProducto(id) {
     validarObjectId(id);
+
     const productoEliminado = await productoRepository.softDelete(id);
 
     if (!productoEliminado) {
-      const error = new Error('No se encontró la pieza que intenta dar de baja.');
-      error.statusCode = 404;
-      throw error;
+      throw crearError(
+        'No se encontró la pieza que intenta dar de baja.',
+        404
+      );
     }
 
     return productoEliminado;

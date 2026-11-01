@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { obtenerProductos } from "../services/productosService";
 
 export default function useProductos() {
@@ -7,15 +7,38 @@ export default function useProductos() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    let vigente = true;
-    obtenerProductos().then((datos) => {
-      if (vigente) setProductos(Array.isArray(datos) ? datos : []);
-    }).catch((fallo) => {
-      if (vigente) setError(fallo.message || "No se pudieron cargar los productos.");
-    }).finally(() => {
-      if (vigente) setCargando(false);
-    });
-    return () => { vigente = false; };
+    let activo = true;
+
+    async function cargarProductos() {
+      try {
+        setCargando(true);
+        setError("");
+
+        const data = await obtenerProductos();
+
+        if (!activo) return;
+
+        const lista = Array.isArray(data)
+          ? data
+          : Array.isArray(data?.productos)
+            ? data.productos
+            : [];
+
+        setProductos(lista);
+      } catch (err) {
+        if (activo) {
+          setError(err.message || "No se pudieron cargar los productos.");
+        }
+      } finally {
+        if (activo) setCargando(false);
+      }
+    }
+
+    cargarProductos();
+
+    return () => {
+      activo = false;
+    };
   }, []);
 
   return { productos, cargando, error };

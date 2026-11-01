@@ -53,7 +53,7 @@ export default function Registro() {
   }
 
   return (
-    <section className={styles.page}>
+    <section className={`container ${styles.page}`}>
       <h1>Crear una cuenta</h1>
       <p>Registrate para formar parte de Mueblería Hermanos Jota.</p>
 
