@@ -7,6 +7,8 @@ function ProductCard({
   image,
   name,
   price,
+  description,
+  materials,
   onAddToCart,
   imageAlt,
   currency = "ARS",
@@ -40,6 +42,16 @@ function ProductCard({
         <h3 id={titleId} className="name" title={name}>
           {name}
         </h3>
+
+        {description && (
+          <p className="description">{description}</p>
+        )}
+
+        {materials && (
+          <p className="materials">
+            <strong>Materiales:</strong> {materials}
+          </p>
+        )}
 
         <p className="price">
           <data value={price}>{formattedPrice}</data>

@@ -12,6 +12,11 @@ const productSchema = new mongoose.Schema({
     default: '',
     trim: true,
   },
+  materiales: {
+    type: String,
+    default: '',
+    trim: true,
+  },
   precio: {
     type: Number,
     required: true,

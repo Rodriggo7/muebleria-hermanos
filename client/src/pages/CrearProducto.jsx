@@ -18,6 +18,7 @@ export default function CrearProducto() {
   const [formulario, setFormulario] = useState({
     nombre: "",
     descripcion: "",
+    materiales: "",
     precio: "",
     stock: "0",
     categoria: "",
@@ -82,6 +83,17 @@ export default function CrearProducto() {
         </label>
 
         <label className={styles.field}>
+          Materiales
+          <textarea
+            className={`${styles.control} ${styles.textarea}`}
+            name="materiales"
+            value={formulario.materiales}
+            onChange={manejarCambio}
+            placeholder="Ej.: Nogal macizo FSC®, herrajes de latón"
+          />
+        </label>
+
+        <label className={styles.field}>
           Precio
           <input
             className={styles.control}
@@ -132,9 +144,10 @@ export default function CrearProducto() {
           <input
             className={styles.control}
             name="imagen"
-            type="url"
+            type="text"
             value={formulario.imagen}
             onChange={manejarCambio}
+            placeholder="/images/productos/ejemplo.png"
           />
         </label>
 

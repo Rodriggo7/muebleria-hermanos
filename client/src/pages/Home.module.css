@@ -1,11 +1,83 @@
+
 .hero {
-  margin-block: var(--space-6);
-  padding: clamp(2rem, 7vw, 6rem);
-  border-radius: var(--radius-lg);
-  background: linear-gradient(120deg, rgba(47,47,47,.72), rgba(47,47,47,.18)), url("https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=85") center/cover;
-  color: white;
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 480px;
+  margin-block: 32px 48px;
+  padding: clamp(32px, 7vw, 88px);
+  overflow: hidden;
+  border-radius: 4px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(35, 29, 25, 0.78) 0%,
+      rgba(35, 29, 25, 0.48) 55%,
+      rgba(35, 29, 25, 0.08) 100%
+    ),
+    url("https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=85")
+    center 55% / cover;
+  color: #F5E6D3;
 }
-.hero h1, .hero p { max-width: 18ch; margin-bottom: var(--space-4); color: white; }
-.eyebrow { text-transform: uppercase; letter-spacing: .12em; }
-.section { padding-block: var(--space-7); }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: var(--space-5); margin-block: var(--space-5); }
+
+.hero h1 {
+  max-width: 750px;
+  margin-bottom: 24px;
+  color: #F5E6D3;
+  font-family: var(--font-secondary);
+  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.hero p {
+  max-width: 480px;
+  margin-bottom: 28px;
+  color: #F5E6D3;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.eyebrow {
+  margin-bottom: 16px;
+  color: #D4A437;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.section {
+  padding-block: 64px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, 250px), 1fr)
+  );
+  gap: 32px;
+  margin-block: 32px;
+}
+
+@media (max-width: 600px) {
+  .hero {
+    min-height: 400px;
+    margin-block: 16px 32px;
+    padding: 32px 24px;
+    background-position: 60% center;
+  }
+
+  .section {
+    padding-block: 40px;
+  }
+
+  .grid {
+    gap: 24px;
+  }
+}
