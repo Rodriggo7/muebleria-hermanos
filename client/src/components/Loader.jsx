@@ -1,4 +1,4 @@
-import styles from "../styles/Loader.module.css";
+﻿import "../styles/Loader.css";
 
 const SIZES = ["sm", "md", "lg"];
 
@@ -11,17 +11,23 @@ function Loader({
 }) {
   const safeSize = SIZES.includes(size) ? size : "md";
 
-  const classes = [styles.wrapper, fullScreen && styles.fullScreen, className]
+  const classes = [
+    "loader-wrapper",
+    fullScreen && "loader-fullScreen",
+    className,
+  ]
     .filter(Boolean)
     .join(" ");
 
   return (
     <div className={classes} role="status" aria-live="polite">
       <span
-        className={`${styles.spinner} ${styles[safeSize]}`}
+        className={`loader-spinner loader-${safeSize}`}
         aria-hidden="true"
       />
-      <span className={showLabel ? styles.label : styles.srOnly}>{label}</span>
+      <span className={showLabel ? "loader-label" : "srOnly"}>
+        {label}
+      </span>
     </div>
   );
 }

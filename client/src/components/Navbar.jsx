@@ -1,24 +1,25 @@
-import { useCallback, useEffect, useId, useRef, useState } from "react";
-import styles from "../styles/Navbar.module.css";
+﻿import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import "../styles/Navbar.css";
 
 const DEFAULT_LINKS = [
   { label: "Inicio", href: "/" },
   { label: "Productos", href: "/productos" },
-  { label: "Nosotros", href: "/nosotros" },
   { label: "Contacto", href: "/contacto" },
 ];
 
 function Navbar({
-  brandName = "Tienda Artesanal",
+  brandName = "Mueblería Hermanos Jota",
   links = DEFAULT_LINKS,
-  activeHref = "/",
   onNavigate,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const menuId = useId();
   const toggleRef = useRef(null);
 
-  const toggleMenu = useCallback(() => setIsOpen((prev) => !prev), []);
+  const toggleMenu = useCallback(() => {
+    setIsOpen((prev) => !prev);
+  }, []);
 
   useEffect(() => {
     if (!isOpen) return undefined;
@@ -50,63 +51,49 @@ function Navbar({
   };
 
   return (
-    <header className={styles.header}>
-      <nav
-        className={`${styles.nav} container`}
-        aria-label="Navegación principal"
-       >
-        <a
-          href="/"
-          className={styles.logo}
+    <header className="header">
+      <nav className="nav container" aria-label="Navegación principal">
+        <Link
+          to="/"
+          className="logo"
           aria-label={`${brandName} - Ir al inicio`}
-         >
+        >
           {brandName}
-        </a>
+        </Link>
 
         <button
           ref={toggleRef}
           type="button"
-          className={styles.toggle}
+          className="toggle"
           aria-expanded={isOpen}
           aria-controls={menuId}
           aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
           onClick={toggleMenu}
-         >
-          <span
-            className={`${styles.bar} ${styles.barTop}`}
-            aria-hidden="true"
-          />
-          <span
-            className={`${styles.bar} ${styles.barMiddle}`}
-            aria-hidden="true"
-          />
-          <span
-            className={`${styles.bar} ${styles.barBottom}`}
-            aria-hidden="true"
-          />
+        >
+          <span className="bar barTop" aria-hidden="true" />
+          <span className="bar barMiddle" aria-hidden="true" />
+          <span className="bar barBottom" aria-hidden="true" />
         </button>
 
         <div
           id={menuId}
-          className={`${styles.menuWrapper} ${isOpen ? styles.menuOpen : ""}`}
-         >
-          <ul className={styles.menu} role="list">
-            {links.map((link) => {
-              const isActive = link.href === activeHref;
-
-              return (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className={`${styles.link} ${isActive ? styles.active : ""}`}
-                    aria-current={isActive ? "page" : undefined}
-                    onClick={handleLinkClick(link)}
-                   >
-                    {link.label}
-                  </a>
-                </li>
-              );
-            })}
+          className={`menuWrapper ${isOpen ? "menuOpen" : ""}`}
+        >
+          <ul className="menu" role="list">
+            {links.map((link) => (
+              <li key={link.href}>
+                <NavLink
+                  to={link.href}
+                  end={link.href === "/"}
+                  className={({ isActive }) =>
+                    `link ${isActive ? "active" : ""}`
+                  }
+                  onClick={handleLinkClick(link)}
+                >
+                  {link.label}
+                </NavLink>
+              </li>
+            ))}
           </ul>
         </div>
       </nav>

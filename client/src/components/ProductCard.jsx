@@ -1,12 +1,14 @@
-import { memo, useMemo } from "react";
+﻿import { memo, useMemo } from "react";
 import Button from "./Button";
-import styles from "../styles/ProductCard.module.css";
+import "../styles/ProductCard.css";
 
 function ProductCard({
   id,
   image,
   name,
   price,
+  description,
+  materials,
   onAddToCart,
   imageAlt,
   currency = "ARS",
@@ -25,27 +27,37 @@ function ProductCard({
   const handleAddToCart = () => onAddToCart?.(id);
 
   return (
-    <article className={styles.card} aria-labelledby={titleId}>
-      <div className={styles.imageWrapper}>
+    <article className="card" aria-labelledby={titleId}>
+      <div className="imageWrapper">
         <img
           src={image}
           alt={imageAlt ?? name}
-          className={styles.image}
+          className="image"
           loading="lazy"
           decoding="async"
         />
       </div>
 
-      <div className={styles.body}>
-        <h3 id={titleId} className={styles.name} title={name}>
+      <div className="body">
+        <h3 id={titleId} className="name" title={name}>
           {name}
         </h3>
 
-        <p className={styles.price}>
+        {description && (
+          <p className="description">{description}</p>
+        )}
+
+        {materials && (
+          <p className="materials">
+            <strong>Materiales:</strong> {materials}
+          </p>
+        )}
+
+        <p className="price">
           <data value={price}>{formattedPrice}</data>
         </p>
 
-        <div className={styles.action}>
+        <div className="action">
           <Button
             variant="primary"
             fullWidth

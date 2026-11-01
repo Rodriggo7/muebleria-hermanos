@@ -1,5 +1,5 @@
-import { forwardRef } from "react";
-import styles from "../styles/Button.module.css";
+﻿import { forwardRef } from "react";
+import "../styles/Button.css";
 
 const VARIANTS = ["primary", "secondary", "outline", "danger"];
 
@@ -20,10 +20,10 @@ const Button = forwardRef(function Button(
   const safeVariant = VARIANTS.includes(variant) ? variant : "primary";
 
   const classes = [
-    styles.button,
-    styles[safeVariant],
-    fullWidth && styles.fullWidth,
-    loading && styles.loading,
+    "button",
+    safeVariant,
+    fullWidth && "fullWidth",
+    loading && "loading",
     className,
   ]
     .filter(Boolean)
@@ -37,12 +37,12 @@ const Button = forwardRef(function Button(
       disabled={disabled || loading}
       aria-busy={loading || undefined}
       {...rest}
-     >
+    >
       {loading ? (
-        <span className={styles.spinner} aria-hidden="true" />
+        <span className="spinner" aria-hidden="true" />
       ) : (
         icon && (
-          <span className={styles.icon} aria-hidden="true">
+          <span className="icon" aria-hidden="true">
             {icon}
           </span>
         )

@@ -1,10 +1,8 @@
-import styles from "../styles/Footer.module.css";
+﻿import "../styles/Footer.css";
 
 const DEFAULT_USEFUL_LINKS = [
-  { label: "Envíos y entregas", href: "/envios" },
-  { label: "Cambios y devoluciones", href: "/devoluciones" },
-  { label: "Preguntas frecuentes", href: "/faq" },
-  { label: "Términos y condiciones", href: "/terminos" },
+  { label: "Productos", href: "/productos" },
+  { label: "Contacto", href: "/contacto" },
 ];
 
 const DEFAULT_SOCIAL_LINKS = [
@@ -14,7 +12,7 @@ const DEFAULT_SOCIAL_LINKS = [
 const DEFAULT_CONTACT = {
   address: "Av. San Juan 2847, CABA, Argentina",
   email: "ventas@hermanosjota.com.ar",
-  whatsapp: "+54 11 4567-8900",
+  phone: "+54 11 4567-8900",
 };
 
 const ICON_PROPS = {
@@ -65,22 +63,22 @@ function Footer({
   socialLinks = DEFAULT_SOCIAL_LINKS,
 }) {
   return (
-    <footer className={styles.footer}>
-      <div className={`${styles.inner} container`}>
-        <section className={styles.brand}>
-          <p className={styles.brandName}>{storeName}</p>
-          <p className={styles.description}>{description}</p>
+    <footer className="footer">
+      <div className="inner container">
+        <section className="brand">
+          <p className="brandName">{storeName}</p>
+          <p className="description">{description}</p>
 
-          <ul className={styles.social} role="list">
+          <ul className="social" role="list">
             {socialLinks.map((social) => (
               <li key={social.name}>
                 <a
                   href={social.href}
-                  className={styles.socialLink}
+                  className="socialLink"
                   aria-label={social.label}
                   target="_blank"
                   rel="noopener noreferrer"
-                 >
+                >
                   <SocialIcon name={social.name} />
                 </a>
               </li>
@@ -89,11 +87,11 @@ function Footer({
         </section>
 
         <nav aria-label="Links útiles">
-          <h2 className={styles.heading}>Links útiles</h2>
-          <ul className={styles.list} role="list">
+          <h2 className="heading">Links útiles</h2>
+          <ul className="list" role="list">
             {usefulLinks.map((link) => (
               <li key={link.href}>
-                <a href={link.href} className={styles.link}>
+                <a href={link.href} className="link">
                   {link.label}
                 </a>
               </li>
@@ -102,19 +100,19 @@ function Footer({
         </nav>
 
         <section>
-          <h2 className={styles.heading}>Contacto</h2>
-          <address className={styles.contact}>
+          <h2 className="heading">Contacto</h2>
+          <address className="contact">
             {contact.address && <span>{contact.address}</span>}
             {contact.email && (
-              <a href={`mailto:${contact.email}`} className={styles.link}>
+              <a href={`mailto:${contact.email}`} className="link">
                 {contact.email}
               </a>
             )}
             {contact.phone && (
               <a
                 href={`tel:${contact.phone.replace(/[^\d+]/g, "")}`}
-                className={styles.link}
-               >
+                className="link"
+              >
                 {contact.phone}
               </a>
             )}
@@ -122,9 +120,9 @@ function Footer({
         </section>
       </div>
 
-      <div className={styles.bottom}>
+      <div className="bottom">
         <div className="container">
-          <p className={styles.copyright}>
+          <p className="copyright">
             © {new Date().getFullYear()} {storeName} Todos los derechos reservados.
           </p>
         </div>
@@ -134,3 +132,4 @@ function Footer({
 }
 
 export default Footer;
+
