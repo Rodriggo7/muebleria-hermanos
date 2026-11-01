@@ -1,7 +1,8 @@
+
 import { Link } from "react-router-dom";
 import useProductos from "../hooks/useProductos";
 import ProductCard from "../components/ProductCard";
-import { useCarrito } from "../hooks/CarritoContext";
+import { useCarrito } from "../hooks/useCarrito.js";
 import styles from "./Home.module.css";
 
 export default function Home() {
@@ -36,7 +37,11 @@ export default function Home() {
               <ProductCard
                 key={p._id}
                 id={p._id}
-                image={p.imagen || p.image || "https://placehold.co/600x450?text=Mueble"}
+                image={
+                  p.imagen ||
+                  p.image ||
+                  "https://placehold.co/600x450?text=Mueble"
+                }
                 name={p.nombre}
                 description={p.descripcion}
                 materials={p.materiales}

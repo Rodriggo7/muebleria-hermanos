@@ -1,8 +1,9 @@
+
 import { Link } from "react-router-dom";
 import useProductos from "../hooks/useProductos";
 import ProductCard from "../components/ProductCard";
 import Loader from "../components/Loader";
-import { useCarrito } from "../hooks/CarritoContext";
+import { useCarrito } from "../hooks/useCarrito.js";
 import styles from "./Productos.module.css";
 
 export default function Productos() {
@@ -26,7 +27,11 @@ export default function Productos() {
             <div key={p._id} className={styles.tile}>
               <ProductCard
                 id={p._id}
-                image={p.imagen || p.image || "https://placehold.co/600x450?text=Mueble"}
+                image={
+                  p.imagen ||
+                  p.image ||
+                  "https://placehold.co/600x450?text=Mueble"
+                }
                 name={p.nombre}
                 description={p.descripcion}
                 materials={p.materiales}

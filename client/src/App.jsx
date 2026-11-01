@@ -1,5 +1,7 @@
-﻿import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { CarritoProvider, useCarrito } from "./hooks/CarritoContext";
+﻿
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { CarritoProvider } from "./hooks/CarritoContext.jsx";
+import { useCarrito } from "./hooks/useCarrito.js";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -29,6 +31,7 @@ function CarritoPanel() {
           Tu carrito (
           {carrito.items.reduce((n, i) => n + i.cantidad, 0)})
         </h2>
+
         <button
           onClick={() => carrito.setAbierto(false)}
           aria-label="Cerrar carrito"
@@ -125,9 +128,18 @@ function AppShell() {
           <Route path="/productos/:id" element={<ProductoDetalle />} />
           <Route path="/contacto" element={<Contacto />} />
           <Route path="/registro" element={<Registro />} />
-          <Route path="/admin/productos" element={<AdministrarProductos />} />
-          <Route path="/admin/productos/nuevo" element={<CrearProducto />} />
-          <Route path="/admin/productos/:id/editar" element={<EditarProducto />} />
+          <Route
+            path="/admin/productos"
+            element={<AdministrarProductos />}
+          />
+          <Route
+            path="/admin/productos/nuevo"
+            element={<CrearProducto />}
+          />
+          <Route
+            path="/admin/productos/:id/editar"
+            element={<EditarProducto />}
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

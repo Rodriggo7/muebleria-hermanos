@@ -10,13 +10,18 @@ export default function Registro() {
     password: "",
     confirmarPassword: "",
   });
+
   const [error, setError] = useState("");
   const [mensaje, setMensaje] = useState("");
   const [cargando, setCargando] = useState(false);
 
   function manejarCambio(event) {
     const { name, value } = event.target;
-    setFormulario((actual) => ({ ...actual, [name]: value }));
+
+    setFormulario((actual) => ({
+      ...actual,
+      [name]: value,
+    }));
   }
 
   async function manejarEnvio(event) {
@@ -38,7 +43,10 @@ export default function Registro() {
         password: formulario.password,
       });
 
-      setMensaje(resultado.mensaje || "Registro completado correctamente.");
+      setMensaje(
+        resultado.mensaje || "Registro completado correctamente."
+      );
+
       setFormulario({
         nombre: "",
         email: "",
@@ -55,7 +63,31 @@ export default function Registro() {
   return (
     <section className={`container ${styles.page}`}>
       <h1>Crear una cuenta</h1>
-      <p>Registrate para formar parte de Mueblería Hermanos Jota.</p>
+
+      <p>
+        Registrate para formar parte de Mueblería Hermanos Jota.
+      </p>
+
+      {mensaje && (
+        <div className={styles.successMessage} role="status">
+          <span className={styles.successIcon} aria-hidden="true">
+            ✓
+          </span>
+
+          <div>
+            <strong>¡Tu cuenta fue creada correctamente!</strong>
+            <p>{mensaje}</p>
+            <span>Ya formás parte de Hermanos Jota.</span>
+          </div>
+        </div>
+      )}
+
+      {error && (
+        <div className={styles.errorMessage} role="alert">
+          <strong>No pudimos completar el registro</strong>
+          <p>{error}</p>
+        </div>
+      )}
 
       <form className={styles.form} onSubmit={manejarEnvio}>
         <label className={styles.field}>
@@ -114,10 +146,11 @@ export default function Registro() {
           />
         </label>
 
-        {error && <p role="alert">{error}</p>}
-        {mensaje && <p role="status">{mensaje}</p>}
-
-        <button className="button primary" type="submit" disabled={cargando}>
+        <button
+          className="button primary"
+          type="submit"
+          disabled={cargando}
+        >
           {cargando ? "Registrando..." : "Registrarme"}
         </button>
       </form>

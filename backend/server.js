@@ -1,4 +1,5 @@
-﻿import 'dotenv/config';
+﻿
+import 'dotenv/config';
 import express from 'express';
 
 import corsMiddleware from './middleware/cors.js';
@@ -8,6 +9,8 @@ import errorHandler from './middleware/errorHandler.js';
 
 import productoRoutes from './routes/productoRoutes.js';
 import usuarioRoutes from './routes/usuarioRoutes.js';
+import contactoRoutes from './routes/contactoRoutes.js';
+
 import connectDatabase from './config/database.js';
 
 const app = express();
@@ -22,6 +25,7 @@ app.get('/api/health', (req, res) => {
 
 app.use('/api/productos', productoRoutes);
 app.use('/api/usuarios', usuarioRoutes);
+app.use('/api/contacto', contactoRoutes);
 
 app.use(notFoundHandler);
 app.use(errorHandler);

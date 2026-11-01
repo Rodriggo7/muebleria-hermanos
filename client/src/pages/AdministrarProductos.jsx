@@ -1,4 +1,5 @@
-﻿import { useCallback, useEffect, useState } from "react";
+﻿
+import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   obtenerProductos,
@@ -27,8 +28,32 @@ export default function AdministrarProductos() {
   }, []);
 
   useEffect(() => {
-    cargarProductos();
-  }, [cargarProductos]);
+    let vigente = true;
+
+    async function cargarInicialmente() {
+      try {
+        const data = await obtenerProductos();
+
+        if (vigente) {
+          setProductos(Array.isArray(data) ? data : data.productos || []);
+        }
+      } catch (err) {
+        if (vigente) {
+          setError(err.message || "No se pudieron cargar los productos.");
+        }
+      } finally {
+        if (vigente) {
+          setCargando(false);
+        }
+      }
+    }
+
+    cargarInicialmente();
+
+    return () => {
+      vigente = false;
+    };
+  }, []);
 
   function manejarEliminacion(producto) {
     setProductoAEliminar(producto);
@@ -175,12 +200,9 @@ export default function AdministrarProductos() {
               Hermanos Jota · Panel de gestión
             </span>
 
-            <h2 id="titulo-confirmacion">
-              ¿Estás seguro?
-            </h2>
+            <h2 id="titulo-confirmacion">¿Estás seguro?</h2>
 
             <h3>¿Querés dar de baja este producto?</h3>
-
             <p
               id="descripcion-confirmacion"
               className={styles.modalDescription}
