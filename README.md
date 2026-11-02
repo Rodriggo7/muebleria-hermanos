@@ -211,7 +211,51 @@ npm start
 
 ## Despliegue
 
-Los enlaces públicos de frontend y backend se incorporarán una vez realizados y verificados los despliegues.
+El proyecto se encuentra desplegado y operativo en producción utilizando una arquitectura distribuida:
+
+- **Frontend (Vercel):** <https://muebleria-hermanos-silk.vercel.app>
+  - **Tecnología:** React + Vite.
+  - **Configuración:** Integración continua (CI/CD) desde la rama `main` (directorio raíz: `/client`). Manejo de rutas *client-side* mediante `client/vercel.json`.
+- **Backend (Render):** <https://muebleria-hermanos-api.onrender.com>
+  - **Tecnología:** Node.js, Express y MongoDB (Mongoose).
+  - **Configuración:** Servicio Web conectado a la rama `main` (directorio raíz: `/backend`).
+
+URL base para consumir la API: `https://muebleria-hermanos-api.onrender.com`
+
+---
+
+### Verificación del Backend en Render
+
+El backend ya está desplegado y activo en Render. Se verificó su funcionamiento con solicitudes reales:
+
+| Endpoint | Método | Estado | Respuesta |
+|----------|--------|--------|-----------|
+| `/api/health` | GET | `200 OK` | `{"status":"ok"}` |
+| `/api/productos` | GET | `200 OK` | Array JSON con el catálogo de productos |
+
+#### Endpoints de prueba
+
+- **Verificar que el servidor está activo:**
+
+  <https://muebleria-hermanos-api.onrender.com/api/health>
+
+- **Obtener los productos:**
+
+  <https://muebleria-hermanos-api.onrender.com/api/productos>
+
+Estos son los únicos endpoints de prueba expuestos por la API. Las demás rutas comunes (`/api`, `/api/categorias`, `/api/usuarios`, `/api/auth`, `/api/pedidos`, etc.) devuelven `404` con un mensaje JSON de error:
+
+```json
+{
+  "error": "Recurso no encontrado",
+  "mensaje": "La ruta '/api/<ruta>' no existe en la casa taller."
+}
+```
+
+#### Cold start (plan gratuito de Render)
+
+La instancia gratuita de Render entra en suspensión tras 15 minutos de inactividad. La primera solicitud puede demorar entre 30 y 50 segundos en responder mientras el servidor «despierta». Si un endpoint tarda en responder, abrir primero [`/api/health`](https://muebleria-hermanos-api.onrender.com/api/health) y reintentar.
+
 
 ## Consideraciones
 
